@@ -3,6 +3,9 @@ node_js:
   - "10.2"
 sudo: enabled
 cache: npm
+branches:
+  only:
+  - /^student-.*$/
 before_install:
   - npm install -g mocha
   - ./scripts/setup-student-repo.sh
