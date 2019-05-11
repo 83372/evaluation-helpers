@@ -1,14 +1,20 @@
 const fs = require('fs');
+const path = require('path');
 const assert = require('assert');
+let shouldFail = 0;
+let errors = [];
 
-let path = process.argv[2]
-let list_of_js_files = fs.readdirSync(path).filter(x => x.includes(".js"));
+let folder = process.argv[2]
+let list_of_js_files = fs.readdirSync(folder).filter(x => x.includes(".js"));
 
 let solutions = list_of_js_files.reduce((prev, cur) => {
-  let file = `../${path}/${cur}`;
+  let file = path.join(folder,cur);
   try {
     prev[cur.slice(0, -3)] = require(file).toString();
   } catch (e) {
+    shouldFail = 1;
+    errors.push(`\n In ${file} \n`)
+    errors.push(e)
     prev[cur.slice(0, -3)] = `Looks like some problems with ${file}`;
   }
   return prev;
@@ -30,4 +36,8 @@ let solutions = list_of_js_files.reduce((prev, cur) => {
 //   }))
 // }
 
-console.log(JSON.stringify(solutions,null,2));
+// console.log(JSON.stringify(solutions,null,2));
+console.log("Errors");
+errors.forEach(f=>console.log(f));
+
+process.exit(shouldFail)
