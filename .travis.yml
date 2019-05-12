@@ -5,7 +5,7 @@ sudo: enabled
 cache: npm
 branches:
   only:
-  - /^student-.*$/
+  - master
 before_install:
   - npm install -g mocha
   - ./scripts/setup-student-repo.sh
