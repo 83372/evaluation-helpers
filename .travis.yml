@@ -7,8 +7,11 @@ branches:
   only:
   - master
 before_install:
+  - sudo apt-get update
+  - sudo apt-get install jq
   - npm install -g mocha
   - ./scripts/setup-student-repo.sh
 
 script:
-  - ./scripts/test-all-branches.sh
+  - ./scripts/generate-report.sh
+  - ./scripts/publish-report.sh
