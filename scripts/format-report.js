@@ -27,9 +27,10 @@ function simpleFormatter(_case) {
 
 function suiteFormatter(heading,suites,formatter=simpleFormatter,marker='') {
   let formatted = Object.keys(suites).map(s=>
-    `**${s}:**\n ${marker}\n${suites[s].map(suite => formatter(suite)).join('\n')}${marker}`
+    `**${s}:**\n${marker}\n${suites[s].map(suite => formatter(suite)).join('\n')}${marker}`
   ).join('\n');
-  return `### ${heading}:  \n <details><summary> Click here </summary>\n<p> \n${formatted}\n</p>\n</details> \n`;
+  return `### ${heading}:  \n<details><summary> Click here </summary> \n<p>\n\n
+  ${formatted}\n</p>\n</details> \n`;
 }
 
 function failedFormatter(_case) {
@@ -45,7 +46,7 @@ function failedFormatter(_case) {
 
 let main = function(heading,reportsFile){
   let reportJSON = JSON.parse(fs.readFileSync(reportsFile,"utf8"));
-  return `# Testing report for ${heading}:\n ${toMarkDown(reportJSON)}`;
+  return `# Testing report for ${heading}:\n${toMarkDown(reportJSON)}`;
 }
 
 console.log(main(process.argv[2],process.argv[3]));
