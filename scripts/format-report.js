@@ -29,7 +29,7 @@ function suiteFormatter(heading,suites,formatter=simpleFormatter,marker='') {
   let formatted = Object.keys(suites).map(s=>
     `**${s}:**\n ${marker}\n${suites[s].map(suite => formatter(suite)).join('\n')}${marker}`
   ).join('\n');
-  return `### ${heading}:   \n${formatted}`;
+  return `### ${heading}:  \n <details><summary> Click here </summary>\n<p> \n${formatted}\n</p>\n</details> \n`;
 }
 
 function failedFormatter(_case) {
