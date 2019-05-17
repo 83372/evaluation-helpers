@@ -7,5 +7,5 @@ curl -X POST -H "User-Agent: $USER_AGENT" --data "$BODY" "https://$GITHUB_API@ap
 
 cat comments.txt
 for comment in $(cat comments.txt); do
-  curl -X DELETE -H "User-Agent: $USER_AGENT" "https://$GITHUB_API@api.github.com/repos/83372/practice_language_basics/issues/comments/$comment" -v
+  curl -X DELETE -H "User-Agent: $USER_AGENT" "https://$GITHUB_API@api.github.com/repos/83372/practice_language_basics/issues/comments/$comment"
 done
